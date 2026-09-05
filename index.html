@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Облачное хранилище</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div>
+        <h1>Облако</h1>
+        <div id="userInfo" class="user-info">Не выполнен вход</div>
+    </div>
+    <span id="status">Проверка сервера...</span>
+</header>
+
+<main>
+
+    <!-- ШАГ 1: ЛОГИН. Создаёт (или открывает) папку пользователя на сервере. -->
+    <section id="loginSection" class="login-card">
+        <div class="login-icon">☁</div>
+        <h2>Вход в хранилище</h2>
+        <p>Введите Gmail и имя — при первом входе для вас автоматически создаётся личная папка на сервере.</p>
+
+        <form id="loginForm" class="login-form">
+            <input type="email" id="emailInput" placeholder="user@gmail.com" required autocomplete="email">
+            <input type="text" id="usernameInput" placeholder="Имя (необязательно)" autocomplete="name">
+            <button type="submit" class="primary-button">Войти</button>
+        </form>
+        <div id="loginError" class="login-error"></div>
+    </section>
+
+    <!-- ШАГ 2: ФАЙЛЫ. Подключается только после успешного логина. -->
+    <section id="cloudSection" class="hidden">
+        <section class="toolbar">
+            <button id="uploadButton">⬆ Загрузить файл</button>
+            <button id="folderButton">＋ Новая папка</button>
+            <button id="refreshButton">⟳ Обновить</button>
+            <button id="logoutButton" class="logout">Выйти</button>
+            <input type="file" id="fileInput" hidden>
+        </section>
+
+        <section class="breadcrumb-card">
+            <span id="currentPath">Мои файлы</span>
+        </section>
+
+        <section class="storage">
+            <div class="storage-header">
+                <div>
+                    <h2>Мои файлы</h2>
+                    <p>Только ваши файлы</p>
+                </div>
+                <div id="userStorage" class="user-storage">0 B</div>
+            </div>
+            <div id="fileList">Загрузка...</div>
+        </section>
+    </section>
+
+</main>
+
+<button id="adminLink" class="admin-link">Администратор</button>
+
+<div id="adminModal" class="modal hidden">
+    <div class="modal-content">
+        <button id="closeAdmin" class="modal-close" aria-label="Закрыть">×</button>
+        <h2>Панель администратора</h2>
+        <div id="adminLogin">
+            <p>Введите пароль администратора.</p>
+            <input id="adminPassword" type="password" placeholder="Пароль">
+            <button id="adminLoginButton" class="primary-button">Войти</button>
+            <div id="adminError"></div>
+        </div>
+        <div id="adminPanel" class="hidden">
+            <div class="admin-grid">
+                <div class="stat"><span>Пользователей</span><strong id="adminUsers">0</strong></div>
+                <div class="stat"><span>Использовано</span><strong id="adminUsed">0 GB</strong></div>
+                <div class="stat"><span>Свободно</span><strong id="adminFree">0 GB</strong></div>
+                <div class="stat"><span>Всего</span><strong id="adminTotal">500 GB</strong></div>
+            </div>
+            <div class="admin-users">
+                <h3>Пользователи</h3>
+                <div id="adminUserList">Загрузка...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
